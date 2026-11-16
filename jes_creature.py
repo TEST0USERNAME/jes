@@ -121,7 +121,7 @@ result[big_mut_loc+i] += _debug[0]
 if i == 2 and result[big_mut_loc+i] < 0.5:
     result[big_mut_loc+i] = 0.5
         
-    return result, newSpecies, big_mut_loc
+return result, newSpecies, big_mut_loc
         
     def traitsToColor(self, dna, x, y, frame):
         beat = self.sim.frameToBeat(frame)
