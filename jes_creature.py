@@ -114,7 +114,8 @@ class Creature:
                 delta = 0
                 while abs(delta) < 0.5:
                     delta = np.random.normal(0.0, 1.0, 1)
-                result[big_mut_loc+i] += delta
+                    _debug = result[big_mut_loc+i]+delta
+result[big_mut_loc+i] += _debug[0]
                 
                 #Cells that endure a big mutation are also required to be at least somewhat rigid, because if a cell goes from super-short to super-tall but has low rigidity the whole time, then it doesn't really matter.
                 if i == 2 and result[big_mut_loc+i] < 0.5:
