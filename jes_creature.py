@@ -123,10 +123,10 @@ if i == 2 and result[big_mut_loc+i] < 0.5:
         
 return result, newSpecies, big_mut_loc
         
-    def traitsToColor(self, dna, x, y, frame):
-        beat = self.sim.frameToBeat(frame)
-        beat_prev = (beat+self.sim.beats_per_cycle-1)%self.sim.beats_per_cycle
-        prog = self.sim.frameToBeatFade(frame)
+def traitsToColor(self, dna, x, y, frame):
+    beat = self.sim.frameToBeat(frame)
+    beat_prev = (beat+self.sim.beats_per_cycle-1)%self.sim.beats_per_cycle
+    prog = self.sim.frameToBeatFade(frame)
         
         locationIndex = x*self.sim.CH+y
         DNAIndex = (locationIndex*self.sim.beats_per_cycle+beat)*self.sim.traits_per_box
