@@ -128,26 +128,26 @@ def traitsToColor(self, dna, x, y, frame):
     beat_prev = (beat+self.sim.beats_per_cycle-1)%self.sim.beats_per_cycle
     prog = self.sim.frameToBeatFade(frame)
         
-        locationIndex = x*self.sim.CH+y
-        DNAIndex = (locationIndex*self.sim.beats_per_cycle+beat)*self.sim.traits_per_box
-        DNAIndex_prev = (locationIndex*self.sim.beats_per_cycle+beat_prev)*self.sim.traits_per_box
-        traits = dna[DNAIndex:DNAIndex+self.sim.traits_per_box]
-        traits_prev = dna[DNAIndex_prev:DNAIndex_prev+self.sim.traits_per_box]
-        traits = arrayLerp(traits_prev,traits,prog)
+    locationIndex = x*self.sim.CH+y
+    DNAIndex = (locationIndex*self.sim.beats_per_cycle+beat)*self.sim.traits_per_box
+    DNAIndex_prev = (locationIndex*self.sim.beats_per_cycle+beat_prev)*self.sim.traits_per_box
+    traits = dna[DNAIndex:DNAIndex+self.sim.traits_per_box]
+    traits_prev = dna[DNAIndex_prev:DNAIndex_prev+self.sim.traits_per_box]
+    traits = arrayLerp(traits_prev,traits,prog)
 
-        red = min(max(int(128+traits[0]*128),0),255)
-        green = min(max(int(128+traits[1]*128),0),255)
-        alpha = min(max(int(155+traits[2]*100),64),255) #alpha can't go below 25%
-        color_result = (red,green,255,alpha)
+    red = min(max(int(128+traits[0]*128),0),255)
+    green = min(max(int(128+traits[1]*128),0),255)
+    alpha = min(max(int(155+traits[2]*100),64),255) #alpha can't go below 25%
+    color_result = (red,green,255,alpha)
         
-        if self.codonWithChange is not None:
-            nextGreen = 0
-            if self.codonWithChange >= DNAIndex and self.codonWithChange < DNAIndex+self.sim.traits_per_box:
-                nextGreen = 1
-            prevGreen = 0
-            if self.codonWithChange >= DNAIndex_prev and self.codonWithChange < DNAIndex_prev+self.sim.traits_per_box:
-                prevGreen = 1
-            green_ness = lerp(prevGreen,nextGreen,prog)
-            color_result = listLerp(color_result,(0,255,0,255),green_ness)
+    if self.codonWithChange is not None:
+        nextGreen = 0
+        if self.codonWithChange >= DNAIndex and self.codonWithChange < DNAIndex+self.sim.traits_per_box:
+            nextGreen = 1
+        prevGreen = 0
+        if self.codonWithChange >= DNAIndex_prev and self.codonWithChange < DNAIndex_prev+self.sim.traits_per_box:
+            prevGreen = 1
+        green_ness = lerp(prevGreen,nextGreen,prog)
+        color_result = listLerp(color_result,(0,255,0,255),green_ness)
         
-        return color_result
+    return color_result
